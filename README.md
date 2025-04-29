@@ -1,7 +1,6 @@
 
 # somegames
 
-
 ## features
 
 - games: tictactoe, connect four, gomoku, reversi
