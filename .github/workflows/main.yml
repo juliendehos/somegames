@@ -1,0 +1,22 @@
+name: build and package somegames-web
+
+on:
+  push:
+    branches: main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v22
+        with:
+          nix_path: nixpkgs=channel:nixos-24.11
+
+      - name: Build using Nix
+        run: |
+          cd web
+          nix-shell --run "./package.sh"
+
