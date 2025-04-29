@@ -2,12 +2,6 @@
 # somegames
 
 
-## TODO ?
-
-- somegames-web -> CI/CD ?
-- unit tests: gomoku, reversi
-
-
 ## features
 
 - games: tictactoe, connect four, gomoku, reversi
@@ -32,4 +26,9 @@
 - https://emscripten.org/docs/index.html
 - https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html
 - https://emscripten.org/docs/compiling/GitLab.html
+
+
+## TODO ?
+
+- unit tests: gomoku, reversi
 
