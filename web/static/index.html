@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8"/> 
+        <title>Somegames</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+
+        <h1 id="myTitleH1">Somegames</h1>
+
+        <table>
+          <tr>
+            <td>
+              <canvas id="myCanvas" width="600" height="600"> </canvas>
+            </td>
+            <td>
+
+              <p><button type="button" id="myResetButton">new game</button></p>
+
+              <p>
+              game: <br>
+                <select id="myGameSelect">
+                  <option value="connectfour">connect four</option>
+                  <option value="gomoku7x9">gomoku 7x9</option>
+                  <option value="gomoku8x8">gomoku 8x8</option>
+                  <option value="reversi" selected>reversi</option>
+                  <option value="tictactoe">tictactoe</option>
+                </select>
+              </p>
+
+              <p>
+              bot: <br>
+                <select id="myBotSelect">
+                  <option value="human">human</option>
+                  <option value="mc1k" selected>monte-carlo 1k</option>
+                  <option value="mc10k">monte-carlo 10k</option>
+                  <option value="random">random</option>
+                </select>
+              </p>
+
+              <p>status: <br> <span id="myStatusSpan">Nothing</span></p>
+
+            </td>
+          </tr>
+        </table>
+
+
+        <script>
+
+          let myGame = {};
+          let myBot = {};
+
+          var Module = {
+            onRuntimeInitialized: function() {
+
+              myGame = new Module.Reversi();
+              myBot = new Module.Montecarlo(1000);
+
+              setTitles(myGame, myBot, myTitleH1);
+              refresh(myGame, myCanvas, myStatusSpan);
+
+              myResetButton.onclick = function() {
+                myGame.reset();
+                setTitles(myGame, myBot, myTitleH1);
+                refresh(myGame, myCanvas, myStatusSpan);
+              };
+
+              myCanvas.onclick = function(evt) {
+                handleClick(evt, myGame, myBot, myCanvas, myStatusSpan);
+              };
+
+              myGameSelect.onchange = function() {
+                myGame.delete();
+                myGame = mkGame(myGameSelect.value);
+                setTitles(myGame, myBot, myTitleH1);
+                refresh(myGame, myCanvas, myStatusSpan);
+              }
+
+              myBotSelect.onchange = function() {
+                myBot.delete();
+                myBot = mkBot(myBotSelect.value);
+                setTitles(myGame, myBot, myTitleH1);
+              }
+
+            }
+          };
+
+        </script>
+
+        <script src="somegames-web.js"></script>
+        <script src="somegames-app.js"></script>
+
+    </body>
+</html>
+
